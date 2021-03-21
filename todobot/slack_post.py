@@ -1,5 +1,5 @@
 from slack_bolt import App
-from tokens import get_tokens
+from todobot.tokens import get_tokens
 from datetime import datetime
 import pprint
 
