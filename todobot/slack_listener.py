@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request
 # Use the package we installed
-from todoist_proxy import Todoist
-from slack_post import SlackPost
+from todobot.todoist_proxy import Todoist
+from todobot.slack_post import SlackPost
 import yaml
 from slack_bolt.adapter.flask import SlackRequestHandler
 
@@ -107,7 +107,9 @@ def todoist_event():
     return "ok"
 
 
-if __name__ == '__main__':
+def start_listen():
     flask_app.run(port=3000)
 
-#app.start(port=int(os.environ.get("PORT", 3000)))
+
+if __name__ == '__main__':
+    start_listen()

@@ -1,5 +1,5 @@
-from slack_post import SlackPost
-from todoist_proxy import Todoist
+from todobot.slack_post import SlackPost
+from todobot.todoist_proxy import Todoist
 
 def post_tasks_test():
     slack_post = SlackPost()

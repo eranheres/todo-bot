@@ -5,6 +5,7 @@ steps:
   - functions
   - deploy
   - todo-bot
+  - --runtime=python38
   - --region=us-central1
   - --source=.
   - --trigger-http
