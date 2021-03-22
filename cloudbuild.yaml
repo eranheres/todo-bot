@@ -9,3 +9,4 @@ steps:
   - --region=us-central1
   - --source=.
   - --trigger-http
+  - --allow-unauthenticated
