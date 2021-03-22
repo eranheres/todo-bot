@@ -1,6 +1,6 @@
 from todobot.slack_listener import start_listen
 from flask import escape
-
+import todobot.slack_listener
 
 def todobot(request):
     request_json = request.get_json(silent=True)
