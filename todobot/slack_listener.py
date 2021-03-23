@@ -87,6 +87,7 @@ def update_home_tab(body, say, logger):
 
 
 flask_app = Flask(__name__)
+print("dd {}".format(__name__))
 @flask_app.route("/slack/events", methods=["POST"])
 def slack_events():
     # handler runs App's dispatch method

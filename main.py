@@ -1,19 +1,19 @@
 from todobot.slack_listener import start_listen
-from flask import escape
-import todobot.slack_listener
+from flask import escape, Flask
+from todobot.slack_listener import handler
+from todobot.slack_listener import flask_app
+from todobot.slack_listener import todoist_event
+print(__name__)
+
 
 def todobot(request):
-    request_json = request.get_json(silent=True)
-    request_args = request.args
-
-    if request_json and 'name' in request_json:
-        name = request_json['name']
-    elif request_args and 'name' in request_args:
-        name = request_args['name']
+    if 'todoist' in request.full_path:
+        return todoist_event()
     else:
-        name = 'World'
-    return 'Hello {}!'.format(escape(name))
+        return handler.handle(request)
 
 
 if __name__ == '__main__':
-    pass
+    app = Flask(__name__)
+    app.route('/hello', endpoint=todobot, methods=['GET'],)
+    app.run(port=3000, debug=True)

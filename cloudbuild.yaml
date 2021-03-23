@@ -10,4 +10,3 @@ steps:
   - --source=.
   - --trigger-http
   - --allow-unauthenticated
-  - --port=3000
