@@ -1,5 +1,4 @@
 from todobot.tokens import get_tokens
-from pprint import PrettyPrinter
 from todoist.api import TodoistAPI
 from datetime import datetime
 

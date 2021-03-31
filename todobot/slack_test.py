@@ -55,6 +55,6 @@ def test_set_reminder2():
 
 
 #get_tasks_test()
-post_reminder_test()
-#update_home()
+#post_reminder_test()
+update_home()
 #test_set_reminder2()

@@ -1,7 +1,6 @@
 from slack_bolt import App
 from todobot.tokens import get_tokens
 from datetime import datetime
-import pprint
 
 
 class SlackPost:
@@ -88,10 +87,15 @@ class SlackPost:
             time = item['due']['datetime']
         else:
             time = ""
-        text = ":white_check_mark:  <{}|  *{}*>  {} \n".format(
+        recuring_emoji = ''
+        if 'due' in task['item'] and 'is_recurring' in task['item']['due'] and task['item']['due']['is_recurring']:
+            recuring_emoji = ':arrows_counterclockwise:'
+
+        text = ":white_check_mark:  <{}|  *{}*>  {} {}\n".format(
                             SlackPost.item_url(item),
                             item['content'],
-                            time)
+                            time,
+                            recuring_emoji)
         return [{
             "type": "section",
                     "text": {
