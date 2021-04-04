@@ -145,9 +145,7 @@ class SlackPost:
     def completed_text_block(task):
         blocks = []
         item = task['item']
-        txt = ":collision:~*<{}|{}>*~".format(
-            SlackPost.item_url(item),
-            item['content'])
+        txt = ":collision:~*{}*~".format(item['content'])
         blocks.extend(SlackPost.text_block(txt))
         return blocks
 
