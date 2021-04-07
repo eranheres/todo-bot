@@ -31,6 +31,12 @@ def update_home():
     pending, completed, with_reminders = todoist.get_tasks()
     slack_post.post_task_list_at_home(pending, completed, with_reminders)
 
+def test_post_completed_task():
+    slack_post = SlackPost()
+    todoist = Todoist()
+    pending, completed, with_reminders = todoist.get_tasks()
+    slack_post.post_task_list_at_home(pending, completed, with_reminders)
+
 def test_add_reminder():
     todoist = Todoist()
     api = todoist.api
@@ -53,8 +59,16 @@ def test_set_reminder2():
     todoist.set_reminder(4672920807, "20:00")
 
 
+def test_get_activity_logs():
+    todoist = Todoist()
+    activity = todoist.api.activity.get(parent_project_id=2261029492)
+    print(activity)
 
+
+
+post_tasks_test()
 #get_tasks_test()
 #post_reminder_test()
-update_home()
+#update_home()
 #test_set_reminder2()
+#test_get_activity_logs()

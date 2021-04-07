@@ -91,8 +91,7 @@ class SlackPost:
         if 'due' in task['item'] and 'is_recurring' in task['item']['due'] and task['item']['due']['is_recurring']:
             recuring_emoji = ':arrows_counterclockwise:'
 
-        text = ":white_check_mark:  <{}|  *{}*>  {} {}\n".format(
-                            SlackPost.item_url(item),
+        text = ":white_check_mark:  *{}*  {} {}\n".format(
                             item['content'],
                             time,
                             recuring_emoji)
@@ -111,8 +110,7 @@ class SlackPost:
             time = item['due']['datetime']
         else:
             time = ""
-        text = "<{}|*{}*> {}\n".format(
-            SlackPost.item_url(item),
+        text = "*{}* {}\n".format(
             item['content'],
             time)
         return [
