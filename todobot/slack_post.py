@@ -35,50 +35,69 @@ class SlackPost:
     @staticmethod
     def task_button_block(task):
         item=task['item']
-        return [{
+        blocks = [{
                 "type": "actions",
                 "block_id": str(item['id']),
-                "elements": [
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Done :smile:",
-                            "emoji": True,
-                        },
-                        "style": "primary",
-                        "value": str(item['id']),
-                        "action_id": "done-action-button"
-                    },
-                    {
-                        "type": "timepicker",
-                        "initial_time": datetime.now().strftime("%H:%M"),
-                        "placeholder": {
-                            "type": "plain_text",
-                            "text": "snooze"
-                        },
-                        "action_id": "snooze-action-button"
-                    },
-                    {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Delete :disappointed:",
-                            "emoji": True
-                        },
-                        "value": str(item['id']),
-                        "action_id": "delete-action-button",
-                        "style": "danger",
-                        "confirm": {
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": "Are you sure :worried: ?"
-                            }
-                        }
-                    }
-                ]
+                "elements": [],
             }
             ]
+        blocks[0]["elements"].append(
+                            {
+                                "type": "button",
+                                "text": {
+                                    "type": "plain_text",
+                                    "text": "Done :smile:",
+                                    "emoji": True,
+                                },
+                                "style": "primary",
+                                "value": str(item['id']),
+                                "action_id": "done-action-button"
+                            })
+        if not('due' in task['item'] and 'is_recurring' in task['item']['due'] and task['item']['due']['is_recurring']):
+            blocks[0]["elements"].append(
+                                {
+                                    "type": "button",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Delay :expressionless:",
+                                        "emoji": True,
+                                    },
+                                    "style": "danger",
+                                    "value": str(item['id']),
+                                    "action_id": "delay-action-button"
+                                })
+        blocks[0]["elements"].append(
+                            {
+                                "type": "timepicker",
+                                "initial_time": datetime.now().strftime("%H:%M"),
+                                "placeholder": {
+                                    "type": "plain_text",
+                                    "text": "snooze"
+                                },
+                                "action_id": "snooze-action-button"
+                            })
+
+        if not('due' in task['item'] and 'is_recurring' in task['item']['due'] and task['item']['due']['is_recurring']):
+            blocks[0]["elements"].append(
+                                {
+                                    "type": "button",
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Delete :disappointed:",
+                                        "emoji": True
+                                    },
+                                    "value": str(item['id']),
+                                    "action_id": "delete-action-button",
+                                    "style": "danger",
+                                    "confirm": {
+                                        "text": {
+                                            "type": "mrkdwn",
+                                            "text": "Are you sure :worried: ?"
+                                        }
+                                    }
+                                })
+        return blocks
+
 
     @staticmethod
     def task_text_block(task):

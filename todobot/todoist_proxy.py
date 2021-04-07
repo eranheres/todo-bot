@@ -54,6 +54,17 @@ class Todoist:
         self.api.commit()
         print('deleted task {}'.format(task_id))
 
+    def delay_task(self, task_id):
+        task = self.task_by_id(task_id)
+        if 'due' in task['item'] and task['item']['due'] and task['item']['due']['is_recurring']:
+            print('cant delay recuring tasks {}'.format(task_id))
+            return
+        item = self.api.items.get_by_id(int(task_id))
+        item.update(due={"string":  "tomorrow"})
+        self.api.commit()
+        print('completed updated {}'.format(task_id))
+
+
     def mark_task_complete(self, task_id):
         task = self.task_by_id(task_id)
         if 'due' in task['item'] and task['item']['due'] and task['item']['due']['is_recurring']:

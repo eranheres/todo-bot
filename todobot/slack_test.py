@@ -14,11 +14,6 @@ def post_reminder_test():
     slack_post.post_reminder(with_reminders[0])
 
 
-def update_timer_test():
-    todoist = Todoist()
-    tasks = Todoist.get_tasks()
-    todoist.set_reminder(tasks['id'], )
-
 def get_tasks_test():
     todoist = Todoist()
     tasks = todoist.get_tasks()
@@ -65,10 +60,15 @@ def test_get_activity_logs():
     print(activity)
 
 
+def delay_task():
+    todoist = Todoist()
+    todoist.delay_task(4724753742)
 
-post_tasks_test()
+
+#post_tasks_test()
 #get_tasks_test()
 #post_reminder_test()
-#update_home()
+update_home()
 #test_set_reminder2()
 #test_get_activity_logs()
+#delay_task()

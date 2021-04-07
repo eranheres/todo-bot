@@ -30,6 +30,17 @@ def done_action_response(ack, action, respond):
     ))
 
 
+@app.action("delay-action-button")
+def delete_action_response(ack, action, respond):
+    print("Got action on delay button")
+    ack()
+    todoist.delay_task(action['value'])
+    id = int(action['value'])
+    slack_post.post_message(":+1: the task *{}* is delayed for tomorrow".format(
+        todoist.task_name(id),
+    ))
+
+
 @app.action("delete-action-button")
 def delete_action_response(ack, action, respond):
     print("Got action on delete button")
