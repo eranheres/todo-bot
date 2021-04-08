@@ -47,8 +47,7 @@ def delete_action_response(ack, action, respond):
     ack()
     todoist.mark_task_complete(action['value'])
     id = int(action['value'])
-    slack_post.post_message(":+1: the task *<{}|{}>* is now deleted :boom::boom:".format(
-        todoist.task_url(id),
+    slack_post.post_message(":+1: the task *{}* is now deleted :boom::boom:".format(
         todoist.task_name(id),
     ))
 
@@ -61,8 +60,7 @@ def snooze_action_response(ack, action, respond):
     task_id = int(action['block_id'])
     todoist.set_reminder(task_id, selected_time)
     refresh_home()
-    slack_post.post_message(":+1: reminder for *<{}|{}>* was set to {}".format(
-        todoist.task_url(task_id),
+    slack_post.post_message(":+1: reminder for *{}* was set to {}".format(
         todoist.task_name(task_id),
         selected_time))
 
