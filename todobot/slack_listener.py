@@ -24,8 +24,7 @@ def done_action_response(ack, action, respond):
     ack()
     todoist.mark_task_complete(action['value'])
     id = int(action['value'])
-    slack_post.post_message(":+1: the task *<{}|{}>* is now marked as completed :smile:".format(
-        todoist.task_url(id),
+    slack_post.post_message(":+1: the task *{}* is now marked as completed :smile:".format(
         todoist.task_name(id),
     ))
 
